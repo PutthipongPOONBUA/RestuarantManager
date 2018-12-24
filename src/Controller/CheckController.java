@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.MenuToCheck;
+import Model.database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,16 +26,16 @@ public class CheckController {
     @FXML
     TableView listCheck;
     @FXML
-    TableColumn<Schedule2,String>name,price,table;
+    TableColumn<MenuToCheck,String>name,price,table;
 
-    ObservableList<Schedule2> Data= FXCollections.observableArrayList();
-    ArrayList<Schedule2> kawin = Start();
+    ObservableList<MenuToCheck> Data= FXCollections.observableArrayList();
+    ArrayList<MenuToCheck> kawin = Start();
     double total=0;
 // back to home scaen
     @FXML public void toMainPageBtn(ActionEvent event){
         home = (Button) event.getSource();
         Stage stage = (Stage) home.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/Main1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/Main2.fxml"));
         try {
             stage.setScene(new Scene(fxmlLoader.load(), 1280, 720));
             stage.show();
@@ -42,8 +44,8 @@ public class CheckController {
         }
     }
 
-    public ArrayList<Schedule2> Start(){
-        ArrayList<Schedule2> arrayList = new ArrayList<>();
+    public ArrayList<MenuToCheck> Start(){
+        ArrayList<MenuToCheck> arrayList = new ArrayList<>();
         String driver = "org.sqlite.JDBC";
         String urlDB = "jdbc:sqlite:FoodShop.db";
         try{
@@ -53,7 +55,7 @@ public class CheckController {
             String sql = "Select * From table1";
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()){
-                arrayList.add(new Schedule2(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("table")));
+                arrayList.add(new MenuToCheck(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("table")));
 
             }
             connection.close();
@@ -67,14 +69,14 @@ public class CheckController {
 
     public void addfunc(){
         Data.clear();
-        for(Schedule2 x : kawin)
-            Data.add(new Schedule2(x.getName(),x.getPrice(),x.getTable()));
+        for(MenuToCheck x : kawin)
+            Data.add(new MenuToCheck(x.getName(),x.getPrice(),x.getTable()));
         setTotal();
     }
 
     public void setTotal(){
 
-        for(Schedule2 i : kawin)
+        for(MenuToCheck i : kawin)
             total+= Integer.parseInt(i.getPrice());
         totalPrice.setText(String.valueOf(total));
     }
@@ -93,19 +95,19 @@ public class CheckController {
     }
     public void setDis10(){
         total=0;
-        for(Schedule2 i : kawin)
+        for(MenuToCheck i : kawin)
             total+= Integer.parseInt(i.getPrice());
         totalPrice.setText(String.valueOf(total*0.9));
     }
     public void setDis15(){
         total=0;
-        for(Schedule2 i : kawin)
+        for(MenuToCheck i : kawin)
             total+= Integer.parseInt(i.getPrice());
         totalPrice.setText(String.valueOf(total*0.85));
     }
     public void setDis20(){
         total=0;
-        for(Schedule2 i : kawin)
+        for(MenuToCheck i : kawin)
             total+= Integer.parseInt(i.getPrice());
         totalPrice.setText(String.valueOf(total*0.80));
     }
@@ -119,9 +121,9 @@ public class CheckController {
         String tableeeee = choiceBox.getValue();
         Data.clear();
         total = 0;
-        for(Schedule2 x : kawin){
+        for(MenuToCheck x : kawin){
             if(x.getTable().equalsIgnoreCase(tableeeee)){
-                Data.add(new Schedule2(x.getName(),x.getPrice(),x.getTable()));
+                Data.add(new MenuToCheck(x.getName(),x.getPrice(),x.getTable()));
                 total += Double.parseDouble(x.getPrice());
             }
         }

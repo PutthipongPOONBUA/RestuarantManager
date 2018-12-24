@@ -11,9 +11,8 @@
    <children>
       <TableView fx:id="incomeTable" layoutX="26.0" layoutY="35.0" prefHeight="640.0" prefWidth="640.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="193.60003280639648" text="id" />
-          <TableColumn fx:id="name" prefWidth="234.40003967285156" text="name" />
-            <TableColumn fx:id="price" prefWidth="212.7999267578125" text="price" />
+          <TableColumn fx:id="name" prefWidth="308.8000545501709" text="name" />
+            <TableColumn fx:id="price" prefWidth="323.1998596191406" text="price" />
         </columns>
       </TableView>
       <Label fx:id="text" layoutX="827.0" layoutY="279.0" prefHeight="124.0" prefWidth="320.0" />
@@ -27,5 +26,10 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="back" layoutX="1121.0" layoutY="27.0" mnemonicParsing="false" onAction="#gotoincome" prefHeight="46.0" prefWidth="87.0" text="กลับ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

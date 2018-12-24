@@ -1,4 +1,4 @@
-package Controller;
+package Model;
 
 import javafx.collections.ObservableList;
 
@@ -202,11 +202,11 @@ public class database {
             e.printStackTrace();
         }
     }
-    public static void removeKit(ObservableList<Schedule3> selectedItems){
+    public static void removeKit(String table){
         try {
             Class.forName(driver);
             Connection connection = DriverManager.getConnection(urlDB);
-            String query = "Delete From kitchen Where = '"+ selectedItems + "'";
+            String query = "Delete From kitchen Where tablee = '"+table+"'";
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(query);
             connection.close();
@@ -217,6 +217,21 @@ public class database {
             e.printStackTrace();
         }
 
+    }
+    public  static void addToincome(String name, String price){
+        try {
+            Class.forName(driver);
+            Connection connection = DriverManager.getConnection(urlDB);
+            String query = "Insert Into Invoid Values('"+name+"','"+price+"')";
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(query);
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Menu;
+import Model.MenuToIncome;
+import Model.database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,16 +22,16 @@ public class OrderController {
     @FXML
     ChoiceBox <String> menuChoiceBox,listTable;
     @FXML
-    TableView <Schedule> menu,list;
+    TableView <Menu> menu,list;
     @FXML
-    TableColumn <Schedule,String>nameMenu,nameList,priceMenu,priceList,typeMenu,table;
+    TableColumn <Menu,String>nameMenu,nameList,priceMenu,priceList,typeMenu,table;
 
 
 // back to Table system
     @FXML public void toBack(ActionEvent event){
         back = (Button) event.getSource();
         Stage stage = (Stage) back.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/Table.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/Main2.fxml"));
         try {
             stage.setScene(new Scene(fxmlLoader.load(), 1280, 720));
             stage.show();
@@ -50,8 +52,9 @@ public class OrderController {
         }
     }
 
-    ObservableList<Schedule> Data= FXCollections.observableArrayList();
-    ObservableList<Schedule> Data2 = FXCollections.observableArrayList();
+    ObservableList<Menu> Data= FXCollections.observableArrayList();
+    ObservableList<Menu> Data2 = FXCollections.observableArrayList();
+    ObservableList<MenuToIncome>Data4 = FXCollections.observableArrayList();
 //
     public void Start(){
         Data.clear();
@@ -65,7 +68,7 @@ public class OrderController {
                 String sql = "Select * From menu";
                 ResultSet resultSet = statement.executeQuery(sql);
                 while(resultSet.next()){
-                    Data.add(new Schedule(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("type")));
+                    Data.add(new Menu(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("type")));
 
                 }
                 connection.close();
@@ -85,7 +88,7 @@ public class OrderController {
                 String sql = "Select * From menu Where type = '"+menuChoiceBox.getValue() + "'";
                 ResultSet resultSet = statement.executeQuery(sql);
                 while(resultSet.next()){
-                    Data.add(new Schedule(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("type")));
+                    Data.add(new Menu(resultSet.getString("name"),resultSet.getString("price"),resultSet.getString("type")));
 
                 }
                 connection.close();
@@ -98,9 +101,9 @@ public class OrderController {
     }
 
     public void initialize(){
-        nameMenu.setCellValueFactory(new PropertyValueFactory<Schedule,String>("name"));
-        priceMenu.setCellValueFactory(new PropertyValueFactory<Schedule,String>("price"));
-        typeMenu.setCellValueFactory(new PropertyValueFactory<Schedule,String>("type"));
+        nameMenu.setCellValueFactory(new PropertyValueFactory<Menu,String>("name"));
+        priceMenu.setCellValueFactory(new PropertyValueFactory<Menu,String>("price"));
+        typeMenu.setCellValueFactory(new PropertyValueFactory<Menu,String>("type"));
         menuChoiceBox.getItems().add("All");
         menuChoiceBox.getItems().add("ทอด");
         menuChoiceBox.getItems().add("ต้ม");
@@ -111,8 +114,8 @@ public class OrderController {
         menu.setItems(Data);
         Start();
 
-        nameList.setCellValueFactory(new PropertyValueFactory<Schedule,String>("name"));
-        priceList.setCellValueFactory(new PropertyValueFactory<Schedule,String>("price"));
+        nameList.setCellValueFactory(new PropertyValueFactory<Menu,String>("name"));
+        priceList.setCellValueFactory(new PropertyValueFactory<Menu,String>("price"));
         list.setItems(Data2);
 
         listTable.getItems().add("1");
@@ -140,9 +143,12 @@ public class OrderController {
 
     }
     public void sentBtn(){
-        for(Schedule x : Data2){
+        for(Menu x : Data2){
             database.addTolist(x.getName(),x.getPrice(),listTable.getValue());
             database.addTokitchen(x.getName(),listTable.getValue());
+        }
+        for(MenuToIncome x : Data4){
+            database.addToincome(x.getName(),x.getPrice());
         }
     }
 

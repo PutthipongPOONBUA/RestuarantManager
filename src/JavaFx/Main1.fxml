@@ -16,7 +16,7 @@
             <Font size="36.0" />
          </font>
       </Button>
-      <Button fx:id="kitchen" layoutX="453.0" layoutY="436.0" mnemonicParsing="false" onAction="#gotoKitchen" prefHeight="151.0" prefWidth="316.0" text="ครัว">
+      <Button fx:id="kitchen" layoutX="453.0" layoutY="409.0" mnemonicParsing="false" onAction="#gotoKitchen" prefHeight="151.0" prefWidth="316.0" text="ครัว">
          <font>
             <Font size="36.0" />
          </font>

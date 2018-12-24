@@ -1,7 +1,7 @@
 package Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Model.Menu;
+import Model.database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
 
 public class AddMenuController extends OrderController{
     @FXML
@@ -19,9 +18,9 @@ public class AddMenuController extends OrderController{
     @FXML
     TextField name, price, type;
     @FXML
-    TableView<Schedule> menu;
+    TableView<Menu> menu;
     @FXML
-    TableColumn<Schedule, String> nameMenu, priceMenu, typeMenu;
+    TableColumn<Menu, String> nameMenu, priceMenu, typeMenu;
     @FXML
     ChoiceBox<String> menuChoiceBox;
 
@@ -56,9 +55,9 @@ public class AddMenuController extends OrderController{
     }
     @Override
     public void initialize() {
-        nameMenu.setCellValueFactory(new PropertyValueFactory<Schedule, String>("name"));
-        priceMenu.setCellValueFactory(new PropertyValueFactory<Schedule, String>("price"));
-        typeMenu.setCellValueFactory(new PropertyValueFactory<Schedule, String>("type"));
+        nameMenu.setCellValueFactory(new PropertyValueFactory<Menu, String>("name"));
+        priceMenu.setCellValueFactory(new PropertyValueFactory<Menu, String>("price"));
+        typeMenu.setCellValueFactory(new PropertyValueFactory<Menu, String>("type"));
         menuChoiceBox.getItems().add("All");
         menuChoiceBox.getItems().add("ทอด");
         menuChoiceBox.getItems().add("ต้ม");

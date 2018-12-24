@@ -44,7 +44,7 @@ public class Main2Controller {
     @FXML public void toBack(ActionEvent event){
         back = (Button) event.getSource();
         Stage stage = (Stage) back.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/Table.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/JavaFx/main1.fxml"));
         try {
             stage.setScene(new Scene(fxmlLoader.load(), 1280, 720));
             stage.show();

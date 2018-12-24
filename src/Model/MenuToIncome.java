@@ -1,21 +1,25 @@
-package Controller;
+package Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Schedule2 {
+public class MenuToIncome {
     private final SimpleStringProperty name;
     private final SimpleStringProperty price;
-    private final SimpleStringProperty table;
 
 
-    public Schedule2(String name, String price,String table) {
+    public MenuToIncome(String name, String price) {
         this.name = new SimpleStringProperty(name);
         this.price = new SimpleStringProperty(price);
-        this.table = new SimpleStringProperty(table);
+
 
     }
-    public String getTable(){
-        return table.get();
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public void setPrice(String price) {
+        this.price.set(price);
     }
 
     public String getName() {
@@ -27,3 +31,4 @@ public class Schedule2 {
     }
 
 }
+
